@@ -33,3 +33,94 @@ main:focus{outline:none}button:disabled{opacity:.5;cursor:not-allowed}textarea{r
 
 /* ============ 页面过渡：内容淡出/上浮 + 顶部进度细线（无遮罩） ============ */
 .page-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:95;background:linear-gradient(90deg,#2f7d5f,#216b55,#8fad8b);transform:scaleX(0);transform-origin:left}
+
+
+/* ============ Round1：选中卡琥珀流动描边 ============ */
+@property --beam{syntax:'<angle>';inherits:false;initial-value:0deg}
+.route-choices>button{position:relative}
+.route-choices>button[aria-pressed=true]::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:2px;background:conic-gradient(from var(--beam),transparent 0 68%,#e8bd66 84%,#fff6dd 91%,transparent 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;animation:beam-run 3.2s linear infinite;pointer-events:none}
+@keyframes beam-run{to{--beam:360deg}}
+
+
+/* ============ Round2：标题拆字 + 排版节奏 ============ */
+.hero-split{margin:0}
+.hero-char{display:inline-block;will-change:transform}
+.hero-seg.is-em .hero-char{color:var(--green)}
+.eyebrow{letter-spacing:2.4px}
+.home-intro .lead,.page-heading p{letter-spacing:.015em}
+
+
+/* ============ Round3：Spotlight 追光 + 点阵纹理 ============ */
+[data-spotlight]{position:relative}
+[data-spotlight]::after{content:'';position:absolute;inset:0;background:radial-gradient(560px circle at var(--mx,-300px) var(--my,-300px),rgba(232,189,102,.15),transparent 42%);opacity:0;transition:opacity .25s;pointer-events:none}
+[data-spotlight]:hover::after{opacity:1}
+body{background-image:radial-gradient(900px 320px at 72% -60px,#dcead055,transparent 70%),radial-gradient(700px 300px at 10% -40px,#f3ead955,transparent 70%),radial-gradient(#216b5510 1px,transparent 1.4px);background-size:auto,auto,26px 26px}
+
+/* ============ Round4：Shimmer 按钮 + 来源浮现 + 清单进度条 ============ */
+.button:disabled{position:relative;overflow:hidden}
+.button:disabled::after{content:'';position:absolute;inset:0;transform:translateX(-110%);background:linear-gradient(100deg,transparent 32%,rgba(255,255,255,.22) 50%,transparent 68%);animation:btn-shimmer 1.5s ease-in-out infinite}
+@keyframes btn-shimmer{to{transform:translateX(110%)}}
+.source-list li{animation:fadeUp .38s ease both}
+.source-list li:nth-child(2){animation-delay:.06s}.source-list li:nth-child(3){animation-delay:.12s}.source-list li:nth-child(4){animation-delay:.18s}.source-list li:nth-child(5){animation-delay:.24s}
+.checklist-bar{height:4px;border-radius:999px;background:#e7eedd;overflow:hidden;margin:10px 0 4px}
+.checklist-bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,#8fad8b,var(--green));transition:width .3s ease}
+@keyframes cap-pulse{0%,100%{opacity:.7}50%{opacity:1}}
+.direction-cell.is-found{animation:found-pop .5s ease}
+@keyframes found-pop{0%{transform:scale(.82);opacity:.35}60%{transform:scale(1.07)}100%{transform:scale(1);opacity:1}}
+.kb-answer{will-change:clip-path,transform}
+
+
+/* ============ 室外感知（便携推理包模型） ============ */
+.outdoor-workbench .screen canvas{aspect-ratio:auto;height:auto;max-height:560px;width:100%;background:#eef3e7}
+.outdoor-danger-banner{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:4;max-width:88%;background:#d93025;color:#fff;font-size:15px;font-weight:700;padding:9px 18px;border-radius:10px;text-align:center;box-shadow:0 4px 18px #d9302545;animation:outdoor-blink 1s infinite}
+@keyframes outdoor-blink{50%{background:#a5231c}}
+.outdoor-target-list{list-style:none;padding-left:0!important;margin:12px 0 0;display:flex;flex-direction:column;gap:7px}
+.outdoor-target-list li{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink);background:#f6f8f1;border:1px solid var(--border);border-radius:9px;padding:8px 10px}
+.outdoor-chip{flex:none;min-width:38px;text-align:center;font-size:11px;font-weight:700;color:#fff;border-radius:6px;padding:2px 7px}
+.outdoor-chip-danger{background:#d93025}
+.outdoor-chip-near{background:#e07800}
+.outdoor-chip-mid{background:#c29500}
+.outdoor-off-route{margin-left:auto;font-size:10px;color:var(--muted);border:1px dashed var(--border);border-radius:5px;padding:1px 5px;flex:none}
+.outdoor-legend{display:flex;flex-direction:column;gap:9px;margin:12px 0 4px}
+.outdoor-legend>div{display:flex;align-items:center;gap:11px;font-size:12px}
+.outdoor-legend strong{display:block;font-weight:600;font-size:12.5px}
+.outdoor-legend small{color:var(--muted)}
+.outdoor-dot{flex:none;width:11px;height:11px;border-radius:50%;box-shadow:0 0 0 4px #216b5515}
+@media (prefers-reduced-motion:reduce){.outdoor-danger-banner{animation:none}}
+.reduce-motion .outdoor-danger-banner{animation:none}
+
+
+/* ============ 全息粒子投影台（室内寻物） ============ */
+.particle-holo{position:relative;border:1px solid #2c594a;border-radius:12px;background:radial-gradient(120% 95% at 50% 100%,#0e241c,#123a2c 58%,#0d211a);overflow:hidden;margin-bottom:16px;box-shadow:inset 0 0 40px #05130ecc}
+.particle-holo canvas{display:block;width:100%;height:auto}
+.particle-holo .holo-tag{position:absolute;top:10px;left:12px;font-size:10px;letter-spacing:2.5px;color:#63ffb3;opacity:.85}
+.particle-holo .holo-scan{position:absolute;left:0;right:0;top:6%;height:2px;background:linear-gradient(90deg,transparent,#63ffb3aa,transparent);animation:holo-scan 3.4s ease-in-out infinite}
+@keyframes holo-scan{0%,100%{top:6%}50%{top:92%}}
+
+
+/* ============ 识别粒子可视化层 ============ */
+.screen.scene{transition:transform .35s ease;will-change:transform}
+.vision-workbench .screen.scene>canvas{transform:translate3d(calc(var(--px,0)*-5px),calc(var(--py,0)*-4px),0);transition:transform .2s ease}
+.screen canvas.particle-overlay{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;transform:translate3d(calc(var(--px,0)*11px),calc(var(--py,0)*9px),0);transition:transform .2s ease;background:transparent}
+
+
+/* ============ 批A：用户路径 + 能力边界FAQ ============ */
+.home-users{margin-top:46px}
+.home-user-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.home-user-card{padding:23px;border:1px solid var(--border);border-radius:17px;background:white}
+.home-user-card h3{font-size:19px;font-weight:500;margin:10px 0 8px}
+.home-user-card p{font-size:12px;color:var(--muted);line-height:1.9}
+.home-faq{margin-top:46px}
+.home-faq-list{display:flex;flex-direction:column;gap:10px}
+.home-faq-list details{border:1px solid var(--border);border-radius:12px;background:white;padding:0 20px}
+.home-faq-list summary{cursor:pointer;padding:16px 0;font-size:14px;font-weight:500;list-style:none;position:relative;padding-right:32px}
+.home-faq-list summary::-webkit-details-marker{display:none}
+.home-faq-list summary::after{content:'＋';position:absolute;right:2px;top:14px;color:var(--green);font-size:16px}
+.home-faq-list details[open] summary::after{content:'－'}
+.home-faq-list details[open]{padding-bottom:14px}
+.home-faq-list details p{font-size:12.5px;color:var(--muted);line-height:1.9;margin:0 0 8px}
+@media (max-width:900px){.home-user-grid{grid-template-columns:1fr}}
+
+
+/* ============ 演示入口 ============ */
+.page-heading .text-button{white-space:nowrap}

@@ -1,4 +1,4 @@
-import {useId,useRef,useState} from 'react';
+import {useEffect,useId,useRef,useState} from 'react';
 import {Flip} from 'gsap/Flip';
 import {gsap,useGSAP,useReducedMotion} from './motion';
 import type {Routes,Route} from './tripTypes';
@@ -11,6 +11,19 @@ function RideOverview({legs}:{legs:NonNullable<Route['legs']>}){
       <span className="ride-dot" aria-hidden="true"/><div><strong>{leg.name}</strong>
       <small>{leg.from} 上车 → {leg.to} 下车{index<legs.length-1&&' · 到站后换乘'}</small></div></li>)}
   </ol></div>;
+}
+function Ticker({value,format=(v:number)=>String(Math.round(v))}:{value:number;format?:(v:number)=>string}){
+  const ref=useRef<HTMLSpanElement>(null);
+  const reduced=useReducedMotion();
+  useEffect(()=>{
+    const el=ref.current;
+    if(!el)return;
+    if(reduced){el.textContent=format(value);return;}
+    const state={v:0};
+    const tween=gsap.to(state,{v:value,duration:.8,ease:'power2.out',onUpdate:()=>{el.textContent=format(state.v);}});
+    return()=>{tween.kill();el.textContent=format(value);};
+  },[value]);
+  return <span ref={ref}>{format(value)}</span>;
 }
 function RouteTimeline({steps}:{steps:string[]}){
   const [open,setOpen]=useState(false);const extraId=useId();
@@ -41,13 +54,13 @@ export default function RouteWorkbench({result,onError}:{result:Routes;onError:(
   return <div className="route-workbench" ref={root}>
     <div className="route-choices" role="group" aria-label="选择路线方案">{result.routes.map((route,index)=><button type="button" key={route.id} aria-pressed={selected.id===route.id} aria-expanded={selected.id===route.id} aria-controls={detailId} onClick={()=>{if(selected.id===route.id)return;window.speechSynthesis?.cancel();entrance.current?.progress(1);transition.current?.progress(1);snapshot.current=!reduced?Flip.getState(root.current!.querySelectorAll('.route-choices>button,.route-detail,.route-active-line')):null;setSelectedId(route.id);}}>
       <span className="route-choice-mode"><WorkbenchIcon name={route.mode==='步行'?'walk':'bus'}/>{route.mode}方案<span className="route-selected-mark" aria-hidden="true"><WorkbenchIcon name="check"/></span></span>
-      <strong>{route.duration===null?'耗时未知':Math.ceil(route.duration/60)}{route.duration!==null&&<small> 分钟</small>}</strong>
+      <strong>{route.duration===null?'耗时未知':<><Ticker value={Math.ceil(route.duration/60)}/><small> 分钟</small></>}</strong>
       <span>{route.walkingDistance===null?'步行距离未知':`步行 ${route.walkingDistance} 米`}</span><span className="route-choice-rank">{index===0?'按当前偏好排第 1':route.id}</span>
       {selected.id===route.id&&<><span className="route-choice-expanded">当前展开 · 分段指引见下方</span><span className="route-active-line" data-flip-id="route-active-line" aria-hidden="true"/></>}
     </button>)}</div>
-    <article id={detailId} className="route-detail" aria-label="选中方案详情">
+    <article id={detailId} className="route-detail" data-spotlight aria-label="选中方案详情">
       <div className="route-detail-title"><div><p className="route-id">{selected.id}</p><h3>{selected.mode}出行指引</h3></div><span className="route-detail-symbol"><WorkbenchIcon name={selected.mode==='步行'?'walk':'bus'}/></span></div>
-      <div className="route-detail-metrics"><div><strong>{selected.duration===null?'耗时未知':`${Math.ceil(selected.duration/60)} 分钟`}</strong><span>预计耗时</span></div><div><strong>{selected.distance===null?'—':`${(selected.distance/1000).toFixed(2)} 公里`}</strong><span>总距离</span></div><div><strong>{selected.walkingDistance===null?'—':`${selected.walkingDistance} 米`}</strong><span>步行距离</span></div>{selected.mode!=='步行'&&<div><strong>{selected.transfers} 次</strong><span>换乘</span></div>}</div>
+      <div className="route-detail-metrics"><div><strong>{selected.duration===null?'耗时未知':<><Ticker value={Math.ceil(selected.duration/60)}/> 分钟</>}</strong><span>预计耗时</span></div><div><strong>{selected.distance===null?'—':<><Ticker value={selected.distance/1000} format={v=>v.toFixed(2)}/> 公里</>}</strong><span>总距离</span></div><div><strong>{selected.walkingDistance===null?'—':<><Ticker value={selected.walkingDistance}/> 米</>}</strong><span>步行距离</span></div>{selected.mode!=='步行'&&<div><strong><Ticker value={selected.transfers}/> 次</strong><span>换乘</span></div>}</div>
       {selected.legs&&selected.legs.length>0&&<RideOverview legs={selected.legs}/>}
       <RouteTimeline key={selected.id} steps={selected.steps}/>
       <div className="route-audio"><button className="button secondary route-speak" type="button" onClick={speak}><WorkbenchIcon name="voice"/>朗读当前方案</button><button className="text-button" type="button" onClick={()=>window.speechSynthesis?.cancel()}>停止朗读</button></div>

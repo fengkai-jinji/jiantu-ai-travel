@@ -1,0 +1,32 @@
+.vision-workbench .viewer{padding:0;overflow:hidden;background:#fff;border:1px solid #dce5db;box-shadow:0 18px 55px -38px #21493450}
+.vision-workbench .viewer-heading{padding:22px 25px 19px;margin:0;border-bottom:0}
+.vision-workbench .viewer>.screen{margin:0 14px;border-radius:12px;transform:none!important}
+.spatial-stage{position:relative;isolation:isolate;background:linear-gradient(135deg,#e9eddf,#dce6d6 50%,#c5d6c1);overflow:hidden;min-height:460px;color:#264c3c}
+.spatial-atmosphere{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 76% 18%,#fff6da99,transparent 55%);z-index:-1}
+.spatial-header{position:absolute;z-index:2;top:22px;left:24px;right:24px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12px;letter-spacing:.4px;pointer-events:none}
+.spatial-header>span:first-child{display:flex;align-items:center;gap:8px;background:#ffffffb0;padding:8px 12px;border:1px solid #ffffffc0;border-radius:999px;backdrop-filter:blur(10px)}
+.spatial-header i{width:6px;height:6px;background:#527e60;border-radius:50%}
+.spatial-header>span:last-child{font-size:11px;color:#53684e}
+.spatial-viewport{height:470px;position:relative;width:100%;touch-action:pan-y}
+.spatial-viewport>canvas{position:absolute;inset:0;width:100%!important;height:100%!important;max-height:none!important;background:transparent!important;object-fit:contain;outline:none}
+.spatial-fallback{width:100%!important;height:100%!important;object-fit:contain!important;opacity:.8}
+.spatial-stage[data-ready=true] .spatial-fallback{visibility:hidden}
+.spatial-footer{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:0 24px 25px;margin-top:-10px;position:relative;z-index:2}
+.spatial-eyebrow{display:block;font-size:11px;letter-spacing:2px;color:#52694c;margin-bottom:8px}
+.spatial-footer strong{font-size:22px;letter-spacing:-.6px;font-weight:500;line-height:1.5}
+.spatial-views{display:flex;background:#f5f8ef9c;border:1px solid #ffffffa8;box-shadow:0 6px 20px #3156370a;padding:4px;border-radius:999px;flex:none;backdrop-filter:blur(14px)}
+.spatial-views button{font-size:12px;padding:9px 12px;min-height:44px;border-radius:999px;color:#536e59;transition:background .25s,color .25s}
+.spatial-views button[aria-pressed=true]{background:#295c45;color:#fff}
+.vision-workbench .viewer>.scene-toolbar{padding:20px 25px 0;gap:10px}
+.vision-workbench .viewer>.scene-toolbar .camera-start{padding:14px 23px;background:#215d46;box-shadow:0 5px 16px #214d2920}
+.vision-workbench .viewer>.upload{margin:17px 25px 0;background:#f6f8f2;padding:15px 18px;border:1px solid #d4dfcf;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.vision-workbench .viewer>.upload input{font-size:12px;width:210px;margin:0;max-width:100%}
+.vision-workbench .viewer>.upload .upload-heading{font-size:13px}
+.vision-workbench .viewer>.status,.vision-workbench .viewer>.fine{margin:0 25px;font-size:12px}
+.vision-workbench .viewer>.fine{padding:14px 0 22px}
+.vision-workbench .viewer>.error{margin:14px 25px}
+.vision-workbench .viewer>.screen:has(.spatial-stage)>.vision-frame-corner{display:none}
+.high-contrast .spatial-header>span:last-child,.high-contrast .spatial-eyebrow{color:#193d29}
+@media(max-width:1050px){.spatial-footer{align-items:flex-start;flex-direction:column;gap:15px}.spatial-viewport{height:420px}}
+@media(max-width:700px){.vision-workbench .viewer-heading{padding:18px}.vision-workbench .viewer>.screen{margin:0 8px}.spatial-viewport{height:350px}.spatial-stage{min-height:0}.spatial-header{top:15px;left:15px;right:15px;align-items:flex-start;gap:8px}.spatial-header>span:last-child{max-width:85px;text-align:right;line-height:1.7}.spatial-footer{padding:0 18px 20px;margin-top:-8px}.spatial-footer strong{font-size:21px}.vision-workbench .viewer>.scene-toolbar{padding:18px 18px 0}.vision-workbench .viewer>.upload{margin:15px 18px 0;display:block;padding:15px}.vision-workbench .viewer>.upload input{margin-top:12px;width:100%}.vision-workbench .viewer>.status,.vision-workbench .viewer>.fine{margin:0 18px}.vision-workbench .viewer>.error{margin:12px 18px}}
+@media(max-width:360px){.spatial-viewport{height:300px}.spatial-footer strong{font-size:18px}.spatial-header{left:12px;right:12px}.spatial-header>span:first-child{padding:7px 9px}}

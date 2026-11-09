@@ -60,6 +60,12 @@ function SceneDrawing({type}:{type:'trip'|'vision'|'indoor'}){
   </svg>;
 }
 
+function HeroTitle(){
+  const segments:[string,boolean][]=[['让每一次出发，',false],['都更',false],['从容',true],['。',false]];
+  return <h1 className="hero-split" aria-label="让每一次出发，都更从容。">
+    {segments.map(([text,em],si)=><span key={si} className={em?'hero-seg is-em':'hero-seg'} aria-hidden="true">{text.split('').map((ch,ci)=><span key={ci} className="hero-char">{ch}</span>)}{si===0&&<br/>}</span>)}
+  </h1>;
+}
 export default function Home(){
   const [step,setStep]=useState(0),[replay,setReplay]=useState(0);
   const home=useRef<HTMLDivElement>(null);
@@ -67,6 +73,7 @@ export default function Home(){
   useGSAP(()=>{
     if(reduced)return;
     gsap.from('.home-intro>[data-home-reveal]',{y:24,opacity:.45,duration:.75,stagger:.1,ease:'power3.out'});
+    gsap.from('.hero-char',{y:24,opacity:0,rotateX:-45,duration:.65,stagger:.032,ease:'power3.out'});
     gsap.from('.journey-preview',{y:24,opacity:.55,duration:.85,ease:'power3.out'});
     for(const element of home.current!.querySelectorAll('.home-tools [data-home-reveal],.home-knowledge')){
       gsap.from(element,{y:25,opacity:.5,immediateRender:false,duration:.65,ease:'power2.out',scrollTrigger:{trigger:element,start:'top 94%',once:true}});
@@ -107,7 +114,7 @@ export default function Home(){
   return <div className="home-upgrade" ref={home}>
     <section className="hero home-hero">
       <div className="home-intro">
-        <h1 data-home-reveal>让每一次出发，<br/>都更从容。</h1>
+        <HeroTitle/>
         <p className="lead" data-home-reveal>说出目的地与需求，一起做好出行准备。<br/>从路线比较，到眼前环境，让帮助更具体。</p>
         <div className="hero-actions" data-home-reveal><a className="button" href="#trip">帮我规划出行 <span aria-hidden="true">↗</span></a><a className="home-secondary" href="#knowledge">了解无障碍 <span aria-hidden="true">→</span></a></div>
         <p className="fine" data-home-reveal>为视障者及陪同者设计<br/>每个人都可以了解和使用</p>
@@ -123,9 +130,27 @@ export default function Home(){
     <section className="home-tools">
       <div className="section-title" data-home-reveal><h2>围绕出行，恰好帮到你</h2><p>出发前、行走时，还有日常生活里。</p></div>
       <div className="home-task-grid">
-        <a className="home-task" href="#trip" data-home-reveal><SceneDrawing type="trip"/><div className="home-task-copy"><h3>准备一次出行</h3><p>说明目的地与偏好，比较路线，<br/>整理出发前的准备清单。</p><span>进入出行助手 <span aria-hidden="true">↗</span></span></div></a>
-        <a className="home-task" href="#vision" data-home-reveal><SceneDrawing type="vision"/><div className="home-task-copy"><h3>了解眼前环境</h3><p>了解室外感知的使用方式，<br/>查看接入进度与能力边界。</p><span>查看环境感知 <span aria-hidden="true">↗</span></span></div></a>
-        <a className="home-task" href="#indoor" data-home-reveal><SceneDrawing type="indoor"/><div className="home-task-copy"><h3>寻找身边物品</h3><p>选择瓶／杯、椅子或房门，<br/>了解目标在画面中的位置。</p><span>进入室内寻物 <span aria-hidden="true">↗</span></span></div></a>
+        <a className="home-task" data-spotlight href="#trip" data-home-reveal><SceneDrawing type="trip"/><div className="home-task-copy"><h3>准备一次出行</h3><p>说明目的地与偏好，比较路线，<br/>整理出发前的准备清单。</p><span>进入出行助手 <span aria-hidden="true">↗</span></span></div></a>
+        <a className="home-task" data-spotlight href="#vision" data-home-reveal><SceneDrawing type="vision"/><div className="home-task-copy"><h3>看清眼前街面</h3><p>识别障碍、行人、水坑与车辆，<br/>按距离分级提醒，语音播报。</p><span>查看环境感知 <span aria-hidden="true">↗</span></span></div></a>
+        <a className="home-task" data-spotlight href="#indoor" data-home-reveal><SceneDrawing type="indoor"/><div className="home-task-copy"><h3>寻找身边物品</h3><p>选择瓶／杯、椅子或房门，<br/>了解目标在画面中的位置。</p><span>进入室内寻物 <span aria-hidden="true">↗</span></span></div></a>
+      </div>
+    </section>
+    <section className="home-users">
+      <div className="section-title"><h2>谁在用它，怎么用</h2><p>同一套工具，三种使用路径。</p></div>
+      <div className="home-user-grid">
+        <div className="home-user-card"><span className="eyebrow">本人</span><h3>独立做准备</h3><p>说出目的地与偏好，比较步行、公交与地铁方案；出发前用清单逐项核实，室内找物品有方位与语音提示。</p></div>
+        <div className="home-user-card"><span className="eyebrow">陪同者</span><h3>一起确认</h3><p>和家人一起核对路线、上下车站与设施情况；语音播报让陪同过程更从容，不用一直盯着屏幕。</p></div>
+        <div className="home-user-card"><span className="eyebrow">志愿者与大众</span><h3>先理解再帮助</h3><p>无障碍问答解释怎样开口、怎样描述方向；了解得越多，帮助就越具体。</p></div>
+      </div>
+    </section>
+    <section className="home-faq">
+      <div className="section-title"><h2>能力边界与常见问题</h2><p>如实说明，比夸口更有用。</p></div>
+      <div className="home-faq-list">
+        <details><summary>路线结果等于无障碍可达吗？</summary><p>不等于。路线来自高德路径规划，台阶、电梯、盲道与临时障碍并未核实；行前核实清单就是为这一步准备的。</p></details>
+        <details><summary>识别能测量距离或保证安全吗？</summary><p>不能。画面里的二维框不等于真实米数，提示是观察参考，不是导航指令或安全保证。</p></details>
+        <details><summary>知识问答的资料会过期吗？</summary><p>可能。回答标注来源、日期与核验状态；标着「待核对」的条目请以官方渠道为准。</p></details>
+        <details><summary>我的照片和数据去了哪里？</summary><p>室内/室外识别在本机模型上完成；地点与路线查询经本地代理发送至高德；对话内容由你配置的大模型服务商处理。本地不保存照片。</p></details>
+        <details><summary>为什么有的目标没有被报出来？</summary><p>为减少误报，提示需要连续两帧确认；未检出也不代表目标不存在。</p></details>
       </div>
     </section>
     <section className="home-knowledge" data-home-reveal><div><h2>陪伴，从理解开始。</h2><p>如何开口询问？怎样描述方向？<br/>在无障碍问答中，找到有依据的解释。</p></div><a className="button" href="#knowledge">向 AI 提问 <span aria-hidden="true">↗</span></a><svg viewBox="0 0 180 160" fill="none" aria-hidden="true"><path d="M25 31h106v66H75l-26 23V97H25Z" fill="#b7cdb0"/><path d="M73 65h85v56h-20v21l-25-21H73Z" fill="#779e7d"/><path d="M45 51h63M45 66h38m12 20h42m-42 15h26" stroke="#edf3e8" strokeWidth="5" strokeLinecap="round"/></svg></section>
