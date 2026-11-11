@@ -137,9 +137,9 @@ class Handler(BaseHTTPRequestHandler):
             from kb import load_kb
             try:
                 api_key()
-                configured = {'configured': True, 'agentConfigured': llm_ready()}
+                configured = {'configured': True, 'agentConfigured': llm_ready(), 'agentStreaming': True}
             except ValueError:
-                configured = {'configured': False, 'agentConfigured': llm_ready()}
+                configured = {'configured': False, 'agentConfigured': llm_ready(), 'agentStreaming': True}
             try:
                 topics, entries = load_kb()
                 configured.update({'kbConfigured': True, 'kbTopics': topics, 'kbCount': len(entries)})
@@ -149,16 +149,53 @@ class Handler(BaseHTTPRequestHandler):
         else:
             self.reply(404, {'error': '接口不存在。'})
 
+    def chat_stream(self, body):
+        from uuid import uuid4
+        from agent import chat
+        request_id, sequence = uuid4().hex, 0
+        self.send_response(200)
+        self.send_header('Content-Type', 'text/event-stream; charset=utf-8')
+        self.send_header('Cache-Control', 'no-store')
+        self.send_header('Connection', 'close')
+        self.send_header('X-Accel-Buffering', 'no')
+        self.end_headers()
+        self.close_connection = True
+
+        def emit(kind, payload):
+            nonlocal sequence
+            sequence += 1
+            event = {'requestId': request_id, 'seq': sequence, 'type': kind, 'payload': payload}
+            self.wfile.write(('event: ' + kind + '\ndata: ' + json.dumps(event, ensure_ascii=False) + '\n\n').encode('utf-8'))
+            self.wfile.flush()
+        try:
+            emit('accepted', {})
+            reply = chat(body, emit=emit)
+            emit('result', {'reply': reply})
+            emit('done', {})
+        except (BrokenPipeError, ConnectionResetError):
+            pass
+        except ValueError as error:
+            try:
+                emit('error', {'message': str(error)})
+            except (BrokenPipeError, ConnectionResetError):
+                pass
+        except Exception:
+            try:
+                emit('error', {'message': '出行助手处理失败，请稍后重试。'})
+            except (BrokenPipeError, ConnectionResetError):
+                pass
+
     def do_POST(self):
-        if self.headers.get('Host') != '127.0.0.1:8766' or self.headers.get('Origin') not in (None, 'http://127.0.0.1:8766'):
+        local_host = '127.0.0.1:' + str(self.server.server_port)
+        if self.headers.get('Host') != local_host or self.headers.get('Origin') not in (None, 'http://' + local_host):
             self.reply(403, {'error': '请求来源无效。'})
             return
         from routes import compare
         from agent import chat
         from kb import ask as kb_ask
-        limit = 32000 if self.path in ('/trip-api/chat', '/trip-api/kb') else 4096
+        limit = 32000 if self.path in ('/trip-api/chat', '/trip-api/chat-stream', '/trip-api/kb') else 4096
         handler = {'/trip-api/places': places, '/trip-api/walking': walking,
-                   '/trip-api/compare': compare, '/trip-api/chat': chat,
+                   '/trip-api/compare': compare, '/trip-api/chat': chat, '/trip-api/chat-stream': chat,
                    '/trip-api/kb': kb_ask}.get(self.path)
         if not handler:
             self.reply(404, {'error': '接口不存在。'})
@@ -170,7 +207,10 @@ class Handler(BaseHTTPRequestHandler):
             body = json.loads(self.rfile.read(length))
             if not isinstance(body, dict):
                 raise ValueError('请求格式无效。')
-            self.reply(200, handler(body))
+            if self.path == '/trip-api/chat-stream':
+                self.chat_stream(body)
+            else:
+                self.reply(200, handler(body))
         except (ValueError, UnicodeDecodeError) as error:
             self.reply(400, {'error': str(error) if not isinstance(error, json.JSONDecodeError) else '请求格式无效。'})
         except Exception:

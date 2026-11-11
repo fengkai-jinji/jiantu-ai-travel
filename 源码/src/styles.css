@@ -102,3 +102,25 @@ body{background-image:radial-gradient(900px 320px at 72% -60px,#dcead055,transpa
 .screen.scene{transition:transform .35s ease;will-change:transform}
 .vision-workbench .screen.scene>canvas{transform:translate3d(calc(var(--px,0)*-5px),calc(var(--py,0)*-4px),0);transition:transform .2s ease}
 .screen canvas.particle-overlay{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;transform:translate3d(calc(var(--px,0)*11px),calc(var(--py,0)*9px),0);transition:transform .2s ease;background:transparent}
+
+
+/* ============ 批A：用户路径 + 能力边界FAQ ============ */
+.home-users{margin-top:46px}
+.home-user-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.home-user-card{padding:23px;border:1px solid var(--border);border-radius:17px;background:white}
+.home-user-card h3{font-size:19px;font-weight:500;margin:10px 0 8px}
+.home-user-card p{font-size:12px;color:var(--muted);line-height:1.9}
+.home-faq{margin-top:46px}
+.home-faq-list{display:flex;flex-direction:column;gap:10px}
+.home-faq-list details{border:1px solid var(--border);border-radius:12px;background:white;padding:0 20px}
+.home-faq-list summary{cursor:pointer;padding:16px 0;font-size:14px;font-weight:500;list-style:none;position:relative;padding-right:32px}
+.home-faq-list summary::-webkit-details-marker{display:none}
+.home-faq-list summary::after{content:'＋';position:absolute;right:2px;top:14px;color:var(--green);font-size:16px}
+.home-faq-list details[open] summary::after{content:'－'}
+.home-faq-list details[open]{padding-bottom:14px}
+.home-faq-list details p{font-size:12.5px;color:var(--muted);line-height:1.9;margin:0 0 8px}
+@media (max-width:900px){.home-user-grid{grid-template-columns:1fr}}
+
+
+/* ============ 演示入口 ============ */
+.page-heading .text-button{white-space:nowrap}
