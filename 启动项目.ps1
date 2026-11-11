@@ -1,4 +1,6 @@
 ﻿$ErrorActionPreference = 'Stop'
+# 依赖较多，加大 Node 堆上限，避免 vite 长时间运行后 heap out of memory
+$env:NODE_OPTIONS = '--max-old-space-size=8192'
 $projectRoot = $PSScriptRoot
 $yoloRoot = 'F:\归档\数据集与标注\YOLOv8'
 $services = @(
