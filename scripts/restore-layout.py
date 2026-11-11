@@ -1,7 +1,8 @@
 from pathlib import Path
 import re, shutil
 
-root = Path(__file__).parent
+# 本脚本已移入 scripts/，仓库根目录在上一层
+root = Path(__file__).resolve().parent.parent
 original = root.parent / '传智杯网页设计'
 source = (original / 'framework.html').read_text(encoding='utf-8')
 css = re.search(r'<style>(.*?)</style>', source, re.S)[1]

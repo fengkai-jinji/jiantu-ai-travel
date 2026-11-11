@@ -1,7 +1,12 @@
 node_modules/
 dist/
+网页/
 .env
 *.log
 *.tsbuildinfo
 .env.*
 !.env.example
+
+# YOLO 运行期生成的配置目录（不是源码）
+Ultralytics/
+.ultralytics/
