@@ -1,4 +1,4 @@
-export type WorkbenchIconName='walk'|'bus'|'metro'|'transit'|'pin'|'search'|'camera'|'photo'|'chair'|'bottle'|'door'|'voice'|'stop'|'check'|'compass';
+export type WorkbenchIconName='walk'|'bus'|'metro'|'transit'|'pin'|'search'|'camera'|'photo'|'chair'|'bottle'|'door'|'voice'|'stop'|'check'|'compass'|'all';
 
 /** 路线方案模式 → 图标。后端只会返回 步行 / 公交 / 地铁 / 公交＋地铁 四种。 */
 export function modeIcon(mode:string):WorkbenchIconName{
@@ -36,6 +36,8 @@ export default function WorkbenchIcon({name,className=''}:{name:WorkbenchIconNam
     stop:<rect x="5" y="5" width="14" height="14" rx="3"/>,
     check:<path d="m5 12 5 5L20 6"/>,
     compass:<><circle cx="12" cy="12" r="9"/><path d="m16 8-2 6-6 2 2-6Z"/></>,
+    // 全部目标：四角取景框 + 中心十字，表示"把整个画面都看一遍"
+    all:<><path d="M4 8.6V5.8A1.8 1.8 0 0 1 5.8 4h2.8M15.4 4h2.8A1.8 1.8 0 0 1 20 5.8v2.8M20 15.4v2.8a1.8 1.8 0 0 1-1.8 1.8h-2.8M8.6 20H5.8A1.8 1.8 0 0 1 4 18.2v-2.8"/><circle cx="12" cy="12" r="3.2"/><path d="M12 7.6v1.2M12 15.2v1.2M7.6 12h1.2M15.2 12h1.2"/></>,
   };
   return <svg className={`workbench-icon ${className}`} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">{paths[name]}</svg>;
 }

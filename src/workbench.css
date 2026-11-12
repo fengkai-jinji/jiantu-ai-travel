@@ -102,7 +102,7 @@
 .nearby-pick{flex-shrink:0;font-size:13px!important;padding:10px 14px!important}
 @media(max-width:600px){.nearby-results{padding:16px}.nearby-results li{flex-direction:column;align-items:flex-start;padding:14px}.agent-waiting{align-items:flex-start}}
 .functional-workbench .error{animation:wb-enter .25s ease both;font-size:14px}
-.vision-workbench .target-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:24px}
+.vision-workbench .target-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:24px}
 .vision-workbench .target-buttons button{display:flex;align-items:center;gap:13px;text-align:left;border:0;background:#fff;border-radius:16px;padding:18px 22px;position:relative;transition:background .25s,color .25s}
 .vision-workbench .target-buttons button:hover{transform:translateY(-3px);background:var(--wb-ground)}
 .vision-workbench .target-buttons button.active{background:var(--green);color:#fff}
@@ -121,7 +121,19 @@
 .viewer-live-status[data-running=true]::before{background:var(--green);animation:wb-breathe 1.5s ease-in-out infinite}
 .vision-workbench .screen{position:relative;border-radius:15px;background:var(--wb-ground);overflow:hidden;isolation:isolate}
 .vision-workbench .screen img{height:360px;object-fit:contain}
-.vision-workbench .screen canvas{background:#1e3f31;max-height:460px;min-height:240px;object-fit:contain;aspect-ratio:16/10}
+.vision-workbench .screen canvas{background:#1e3f31}
+.vision-workbench .frame-stack{position:relative;width:100%;max-width:var(--frame-max-w,100%);margin:0 auto;background:#1e3f31}
+.vision-workbench .frame-stack canvas{display:block;width:100%;height:100%;max-height:none;min-height:0;aspect-ratio:auto;object-fit:fill}
+.vision-workbench .screen img.photo-preview{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;margin:0 auto}
+.vision-workbench .screen.is-drop{outline:3px dashed var(--green);outline-offset:-7px}
+.vision-empty{position:absolute;left:50%;top:14px;transform:translateX(-50%);z-index:4;display:flex;flex-direction:column;gap:4px;max-width:calc(100% - 32px);padding:11px 16px;border-radius:12px;background:rgba(18,61,48,.9);color:#fff;text-align:center}
+.vision-empty strong{font-size:14px;font-weight:600}
+.vision-empty span{font-size:12px;line-height:1.5;opacity:.86}
+.vision-empty-actions{display:flex;gap:8px;justify-content:center;margin-top:3px}
+.vision-empty-actions button{border:0;border-radius:999px;padding:6px 15px;background:#fff;color:#123d30!important;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.vision-empty-actions button:hover{filter:brightness(1.08)}
+.retarget-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:var(--wb-copy)}
+.retarget-row .text-button{border:1px solid var(--green);border-radius:999px;padding:5px 12px;background:#fff}
 .vision-workbench .screen .badge{font-size:12px;border:0;z-index:2;max-width:calc(100% - 30px);white-space:normal}
 .vision-scanner{position:absolute;inset:0;pointer-events:none;z-index:1;animation:wb-scan 1.8s ease-in-out infinite;transform:translateY(-35%)}
 .vision-scanner::after{content:'';position:absolute;top:50%;left:5%;right:5%;height:3px;background:var(--green)}
@@ -159,7 +171,7 @@
 .vision-workbench .target-buttons{--target-gap:12px;position:relative;background:#fff;border-radius:16px;isolation:isolate;gap:var(--target-gap)}
 .vision-workbench .target-buttons button,.vision-workbench .target-buttons button.active{background:transparent;z-index:1}
 .vision-workbench .target-buttons button:hover:not(.active){background:var(--wb-ground)}
-.target-selection{position:absolute;left:0;top:0;bottom:0;width:calc((100% - var(--target-gap) - var(--target-gap)) / 3);background:var(--green);border-radius:16px;transform:translateX(calc(var(--target-index) * (100% + var(--target-gap))));transition:transform .35s cubic-bezier(.2,.75,.25,1);pointer-events:none;z-index:0}
+.target-selection{position:absolute;left:0;top:0;bottom:0;width:calc((100% - var(--target-gap) * 3) / 4);background:var(--green);border-radius:16px;transform:translateX(calc(var(--target-index) * (100% + var(--target-gap))));transition:transform .35s cubic-bezier(.2,.75,.25,1);pointer-events:none;z-index:0}
 @media(max-width:500px){.vision-workbench .target-buttons{--target-gap:8px}}
 
 .route-active-line{position:absolute;left:16px;right:16px;bottom:6px;height:3px;border-radius:3px;background:var(--wb-gold);pointer-events:none}

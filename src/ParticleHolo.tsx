@@ -1,6 +1,6 @@
 import {useEffect,useRef} from 'react';
 import {useReducedMotion} from './motion';
-const GLYPHS:Record<string,string>={bottle:'瓶',cup:'杯',chair:'椅',door:'门'};
+const GLYPHS:Record<string,string>={bottle:'瓶',cup:'杯',chair:'椅',door:'门',all:'全'};
 type Particle={x:number;y:number;tx:number;ty:number;vx:number;vy:number;color:string};
 export default function ParticleHolo({target}:{target:string}){
   const canvas=useRef<HTMLCanvasElement>(null),points=useRef<Particle[]>([]),mouse=useRef({x:-999,y:-999});
