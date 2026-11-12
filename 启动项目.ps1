@@ -6,7 +6,7 @@ $projectRoot = $PSScriptRoot
 $python = if ($env:JIANTU_PYTHON) { $env:JIANTU_PYTHON } elseif (Test-Path 'F:\Miniconda\envs\yolo\python.exe') { 'F:\Miniconda\envs\yolo\python.exe' } else { 'python' }
 $node = if ($env:JIANTU_NODE) { $env:JIANTU_NODE } elseif (Test-Path 'F:\NodeJS\node.exe') { 'F:\NodeJS\node.exe' } else { 'node' }
 $services = @(
-    @{ Port=8765; Exe=$python; Args='-X utf8 server/indoor.py'; Cwd=$projectRoot; Log='backend' },
+    @{ Port=8765; Exe=$python; Args='-X utf8 demo/app.py'; Cwd=$projectRoot; Log='backend' },
     @{ Port=8767; Exe=$python; Args='-X utf8 server/outdoor.py'; Cwd=$projectRoot; Log='outdoor' },
     @{ Port=8766; Exe=$python; Args='-X utf8 server/maps.py'; Cwd=$projectRoot; Log='maps' },
     @{ Port=5173; Exe=$node; Args='node_modules/vite/bin/vite.js --host 127.0.0.1'; Cwd=$projectRoot; Log='frontend' }

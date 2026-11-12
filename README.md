@@ -77,7 +77,8 @@
 ├─ README.md               本文件
 ├─ 启动项目.ps1            一键拉起全部服务（Windows 双击即用）
 ├─ src/                    前端源码（React + TypeScript）——唯一一份
-├─ server/                 后端：8766 地图/Agent/知识问答，8767 室外识别，8765 室内识别
+├─ server/                 后端：8766 地图/Agent/知识问答，8767 室外识别
+├─ demo/                   室内识别终端（8765）：单页界面 + 预警引擎 + 24 项测试
 ├─ tests/                  前端与接口测试
 ├─ public/assets/          页面静态插画
 ├─ 便携推理包/             室外识别权重，server/outdoor.py 直接加载，请勿改名
@@ -111,8 +112,10 @@ npm run dev            # http://127.0.0.1:5173
 ```bash
 python server/maps.py      # 8766 · 地图 / Agent / 知识问答
 python server/outdoor.py   # 8767 · 室外街面识别（使用 便携推理包/ 中的权重）
-python server/indoor.py    # 8765 · 室内寻物识别（使用 model-training/indoor/ 中的权重）
+python demo/app.py         # 8765 · 室内识别终端（界面 + 接口，使用 model-training/indoor/ 权重）
 ```
+
+8765 有两个实现，按需要选一个启动即可，接口契约一致：`demo/app.py` 带暗色终端界面（照片 / 视频 / 摄像头 / 手机流四种来源，含距离分级、方位、连续帧确认与语音播报），浏览器直接打开 `http://127.0.0.1:8765` 就能单独演示；`server/indoor.py` 是只提供 `/api/image` 与 `/api/status` 的轻量版，依赖更少，适合只当接口用。
 
 三个识别服务都只依赖 `ultralytics + opencv + numpy`，权重已随仓库提供，clone 后无需另装模型即可运行。室内缺省加载 `model-training/indoor/products_v3`（训练集 5055 张），`products_v2`（训练集 2370 张）保留作回退：请求带 `mode=v2` 即切回，不必重启服务。两版类别口径一致，均为瓶/杯、椅子、门三类；`GET /api/status` 会列出各版本权重是否就位。
 

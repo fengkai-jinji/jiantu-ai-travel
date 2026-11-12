@@ -10,3 +10,7 @@ dist/
 # YOLO 运行期生成的配置目录（不是源码）
 Ultralytics/
 .ultralytics/
+
+# 室内 demo 的临时上传副本与推理产物
+demo/uploads/
+__pycache__/
