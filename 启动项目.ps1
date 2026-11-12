@@ -2,12 +2,14 @@
 # 依赖较多，加大 Node 堆上限，避免 vite 长时间运行后 heap out of memory
 $env:NODE_OPTIONS = '--max-old-space-size=8192'
 $projectRoot = $PSScriptRoot
-$yoloRoot = 'F:\归档\数据集与标注\YOLOv8'
+# 换机器时用环境变量覆盖：JIANTU_PYTHON / JIANTU_NODE 指向自带 ultralytics 的解释器与 node
+$python = if ($env:JIANTU_PYTHON) { $env:JIANTU_PYTHON } elseif (Test-Path 'F:\Miniconda\envs\yolo\python.exe') { 'F:\Miniconda\envs\yolo\python.exe' } else { 'python' }
+$node = if ($env:JIANTU_NODE) { $env:JIANTU_NODE } elseif (Test-Path 'F:\NodeJS\node.exe') { 'F:\NodeJS\node.exe' } else { 'node' }
 $services = @(
-    @{ Port=8765; Exe='F:\Miniconda\envs\yolo\python.exe'; Args='-X utf8 web_demo/app.py'; Cwd=$yoloRoot; Log='backend' },
-    @{ Port=8767; Exe='F:\Miniconda\envs\yolo\python.exe'; Args='-X utf8 server/outdoor.py'; Cwd=$projectRoot; Log='outdoor' },
-    @{ Port=8766; Exe='F:\Miniconda\envs\yolo\python.exe'; Args='-X utf8 server/maps.py'; Cwd=$projectRoot; Log='maps' },
-    @{ Port=5173; Exe='F:\NodeJS\node.exe'; Args='node_modules/vite/bin/vite.js --host 127.0.0.1'; Cwd=$projectRoot; Log='frontend' }
+    @{ Port=8765; Exe=$python; Args='-X utf8 server/indoor.py'; Cwd=$projectRoot; Log='backend' },
+    @{ Port=8767; Exe=$python; Args='-X utf8 server/outdoor.py'; Cwd=$projectRoot; Log='outdoor' },
+    @{ Port=8766; Exe=$python; Args='-X utf8 server/maps.py'; Cwd=$projectRoot; Log='maps' },
+    @{ Port=5173; Exe=$node; Args='node_modules/vite/bin/vite.js --host 127.0.0.1'; Cwd=$projectRoot; Log='frontend' }
 )
 foreach ($service in $services) {
     if (-not (Get-NetTCPConnection -State Listen -LocalPort $service.Port -ErrorAction SilentlyContinue)) {
