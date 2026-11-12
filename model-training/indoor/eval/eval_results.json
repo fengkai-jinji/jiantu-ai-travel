@@ -1,0 +1,470 @@
+{
+  "clean_full": {
+    "images": 1452,
+    "v2": {
+      "ap": {
+        "overall": {
+          "mAP50": 0.2917,
+          "mAP50_95": 0.2284,
+          "precision": 0.4624,
+          "recall": 0.2266
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.0831,
+            "ap50_95": 0.0362,
+            "precision": 0.4217,
+            "recall": 0.0009
+          },
+          "chair": {
+            "ap50": 0.7795,
+            "ap50_95": 0.6426,
+            "precision": 0.9224,
+            "recall": 0.588
+          },
+          "door": {
+            "ap50": 0.0125,
+            "ap50_95": 0.0065,
+            "precision": 0.0433,
+            "recall": 0.0909
+          }
+        },
+        "f1": 0.3042
+      },
+      "at_conf_0.35": {
+        "overall": {
+          "mAP50": 0.3119,
+          "mAP50_95": 0.2611,
+          "precision": 0.4624,
+          "recall": 0.2266
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.1412,
+            "ap50_95": 0.0726,
+            "precision": 0.4217,
+            "recall": 0.0009
+          },
+          "chair": {
+            "ap50": 0.7846,
+            "ap50_95": 0.7066,
+            "precision": 0.9224,
+            "recall": 0.588
+          },
+          "door": {
+            "ap50": 0.01,
+            "ap50_95": 0.004,
+            "precision": 0.0433,
+            "recall": 0.0909
+          }
+        },
+        "f1": 0.3042
+      }
+    },
+    "v3": {
+      "ap": {
+        "overall": {
+          "mAP50": 0.2887,
+          "mAP50_95": 0.2274,
+          "precision": 0.3928,
+          "recall": 0.2214
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.0692,
+            "ap50_95": 0.0253,
+            "precision": 0.2237,
+            "recall": 0.0004
+          },
+          "chair": {
+            "ap50": 0.7839,
+            "ap50_95": 0.6477,
+            "precision": 0.9393,
+            "recall": 0.5728
+          },
+          "door": {
+            "ap50": 0.013,
+            "ap50_95": 0.0091,
+            "precision": 0.0155,
+            "recall": 0.0909
+          }
+        },
+        "f1": 0.2832
+      },
+      "at_conf_0.35": {
+        "overall": {
+          "mAP50": 0.3103,
+          "mAP50_95": 0.2566,
+          "precision": 0.3928,
+          "recall": 0.2214
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.1363,
+            "ap50_95": 0.0486,
+            "precision": 0.2237,
+            "recall": 0.0004
+          },
+          "chair": {
+            "ap50": 0.7849,
+            "ap50_95": 0.7145,
+            "precision": 0.9393,
+            "recall": 0.5728
+          },
+          "door": {
+            "ap50": 0.0097,
+            "ap50_95": 0.0068,
+            "precision": 0.0155,
+            "recall": 0.0909
+          }
+        },
+        "f1": 0.2832
+      }
+    }
+  },
+  "legacy_49": {
+    "images": 49,
+    "v2": {
+      "ap": {
+        "overall": {
+          "mAP50": 0.5585,
+          "mAP50_95": 0.4066,
+          "precision": 0.651,
+          "recall": 0.5267
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.5251,
+            "ap50_95": 0.3825,
+            "precision": 0.7781,
+            "recall": 0.4259
+          },
+          "chair": {
+            "ap50": 0.6757,
+            "ap50_95": 0.5276,
+            "precision": 0.6584,
+            "recall": 0.6184
+          },
+          "door": {
+            "ap50": 0.4748,
+            "ap50_95": 0.3097,
+            "precision": 0.5166,
+            "recall": 0.5357
+          }
+        },
+        "f1": 0.5823
+      },
+      "at_conf_0.35": {
+        "overall": {
+          "mAP50": 0.6051,
+          "mAP50_95": 0.4934,
+          "precision": 0.6897,
+          "recall": 0.4759
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.6178,
+            "ap50_95": 0.526,
+            "precision": 0.8077,
+            "recall": 0.3889
+          },
+          "chair": {
+            "ap50": 0.6922,
+            "ap50_95": 0.5817,
+            "precision": 0.7196,
+            "recall": 0.5746
+          },
+          "door": {
+            "ap50": 0.5053,
+            "ap50_95": 0.3726,
+            "precision": 0.5417,
+            "recall": 0.4643
+          }
+        },
+        "f1": 0.5632
+      }
+    },
+    "v3": {
+      "ap": {
+        "overall": {
+          "mAP50": 0.4987,
+          "mAP50_95": 0.3645,
+          "precision": 0.5505,
+          "recall": 0.4753
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.4442,
+            "ap50_95": 0.3209,
+            "precision": 0.5892,
+            "recall": 0.3704
+          },
+          "chair": {
+            "ap50": 0.6677,
+            "ap50_95": 0.5217,
+            "precision": 0.6361,
+            "recall": 0.6269
+          },
+          "door": {
+            "ap50": 0.3842,
+            "ap50_95": 0.2508,
+            "precision": 0.4262,
+            "recall": 0.4286
+          }
+        },
+        "f1": 0.5101
+      },
+      "at_conf_0.35": {
+        "overall": {
+          "mAP50": 0.5373,
+          "mAP50_95": 0.4217,
+          "precision": 0.5758,
+          "recall": 0.4465
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.5293,
+            "ap50_95": 0.4174,
+            "precision": 0.6061,
+            "recall": 0.3704
+          },
+          "chair": {
+            "ap50": 0.6795,
+            "ap50_95": 0.5757,
+            "precision": 0.6667,
+            "recall": 0.6119
+          },
+          "door": {
+            "ap50": 0.4031,
+            "ap50_95": 0.2721,
+            "precision": 0.4545,
+            "recall": 0.3571
+          }
+        },
+        "f1": 0.5029
+      }
+    }
+  },
+  "clean_near": {
+    "images": 1050,
+    "v2": {
+      "ap": {
+        "overall": {
+          "mAP50": 0.3287,
+          "mAP50_95": 0.2608,
+          "precision": 0.5045,
+          "recall": 0.2555
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.0807,
+            "ap50_95": 0.0378,
+            "precision": 0.4728,
+            "recall": 0.0024
+          },
+          "chair": {
+            "ap50": 0.8757,
+            "ap50_95": 0.73,
+            "precision": 0.9539,
+            "recall": 0.6733
+          },
+          "door": {
+            "ap50": 0.0297,
+            "ap50_95": 0.0145,
+            "precision": 0.0867,
+            "recall": 0.0909
+          }
+        },
+        "f1": 0.3392
+      },
+      "at_conf_0.35": {
+        "overall": {
+          "mAP50": 0.3608,
+          "mAP50_95": 0.3052,
+          "precision": 0.5045,
+          "recall": 0.2555
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.1874,
+            "ap50_95": 0.1188,
+            "precision": 0.4728,
+            "recall": 0.0024
+          },
+          "chair": {
+            "ap50": 0.8714,
+            "ap50_95": 0.7872,
+            "precision": 0.9539,
+            "recall": 0.6733
+          },
+          "door": {
+            "ap50": 0.0237,
+            "ap50_95": 0.0095,
+            "precision": 0.0867,
+            "recall": 0.0909
+          }
+        },
+        "f1": 0.3392
+      }
+    },
+    "v3": {
+      "ap": {
+        "overall": {
+          "mAP50": 0.3236,
+          "mAP50_95": 0.2581,
+          "precision": 0.354,
+          "recall": 0.3464
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.0491,
+            "ap50_95": 0.0126,
+            "precision": 0.2214,
+            "recall": 0.0284
+          },
+          "chair": {
+            "ap50": 0.8867,
+            "ap50_95": 0.7369,
+            "precision": 0.8286,
+            "recall": 0.829
+          },
+          "door": {
+            "ap50": 0.035,
+            "ap50_95": 0.0249,
+            "precision": 0.012,
+            "recall": 0.1818
+          }
+        },
+        "f1": 0.3502
+      },
+      "at_conf_0.35": {
+        "overall": {
+          "mAP50": 0.3356,
+          "mAP50_95": 0.2815,
+          "precision": 0.3581,
+          "recall": 0.3357
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.1025,
+            "ap50_95": 0.0266,
+            "precision": 0.2,
+            "recall": 0.0207
+          },
+          "chair": {
+            "ap50": 0.8745,
+            "ap50_95": 0.7967,
+            "precision": 0.8619,
+            "recall": 0.8046
+          },
+          "door": {
+            "ap50": 0.0299,
+            "ap50_95": 0.0213,
+            "precision": 0.0123,
+            "recall": 0.1818
+          }
+        },
+        "f1": 0.3465
+      }
+    }
+  },
+  "clean_far": {
+    "images": 205,
+    "v2": {
+      "ap": {
+        "overall": {
+          "mAP50": 0.0641,
+          "mAP50_95": 0.0256,
+          "precision": 0.0891,
+          "recall": 0.4883
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.1065,
+            "ap50_95": 0.0442,
+            "precision": 0.1717,
+            "recall": 0.1225
+          },
+          "chair": {
+            "ap50": 0.0217,
+            "ap50_95": 0.0071,
+            "precision": 0.0064,
+            "recall": 0.8542
+          }
+        },
+        "f1": 0.1506
+      },
+      "at_conf_0.35": {
+        "overall": {
+          "mAP50": 0.067,
+          "mAP50_95": 0.0348,
+          "precision": 0.1932,
+          "recall": 0.0015
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.134,
+            "ap50_95": 0.0695,
+            "precision": 0.3864,
+            "recall": 0.003
+          },
+          "chair": {
+            "ap50": 0.0,
+            "ap50_95": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          }
+        },
+        "f1": 0.003
+      }
+    },
+    "v3": {
+      "ap": {
+        "overall": {
+          "mAP50": 0.0516,
+          "mAP50_95": 0.0206,
+          "precision": 0.0665,
+          "recall": 0.4619
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.0871,
+            "ap50_95": 0.0345,
+            "precision": 0.1265,
+            "recall": 0.1738
+          },
+          "chair": {
+            "ap50": 0.0162,
+            "ap50_95": 0.0067,
+            "precision": 0.0065,
+            "recall": 0.75
+          }
+        },
+        "f1": 0.1163
+      },
+      "at_conf_0.35": {
+        "overall": {
+          "mAP50": 0.0853,
+          "mAP50_95": 0.0376,
+          "precision": 0.1667,
+          "recall": 0.0021
+        },
+        "per_class": {
+          "bottle": {
+            "ap50": 0.1707,
+            "ap50_95": 0.0753,
+            "precision": 0.3333,
+            "recall": 0.0042
+          },
+          "chair": {
+            "ap50": 0.0,
+            "ap50_95": 0.0,
+            "precision": 0.0,
+            "recall": 0.0
+          }
+        },
+        "f1": 0.0041
+      }
+    }
+  }
+}

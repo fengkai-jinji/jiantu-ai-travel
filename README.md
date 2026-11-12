@@ -84,6 +84,7 @@
 ├─ 便携推理包/             室外识别权重，server/outdoor.py 直接加载，请勿改名
 ├─ model-training/
 │  ├─ indoor/              室内三类（瓶/杯、椅子、门）训练产物，现行 v3，v2 回退
+│  │  └─ eval/             干净测试集构建与 v2/v3 对比评测，含结论 REPORT.md
 │  ├─ outdoor/             室外四类（障碍/行人/水坑/车辆）训练配置
 │  └─ llm-rag/             LLM 微调语料与评测脚本
 ├─ docs/
