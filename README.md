@@ -125,4 +125,4 @@ python -m unittest discover -s demo -p "test_*.py"
 
 - [更新日志](CHANGELOG.md)
 - [提交前检查报告](docs/提交前检查报告-20261114.md)
-- [30页技术文档PDF](docs/技术文档/见途Jiantu-技术文档-20261112.pdf) / [可编辑DOCX](docs/技术文档/见途Jiantu-技术文档-20261112.docx)
+- [30页技术文档PDF](docs/技术文档/见途Jiantu-技术文档-20261114-修订版.pdf) / [可编辑DOCX](docs/技术文档/见途Jiantu-技术文档-20261114-修订版.docx)
