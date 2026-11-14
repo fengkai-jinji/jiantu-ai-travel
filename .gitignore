@@ -14,3 +14,9 @@ Ultralytics/
 # 室内 demo 的临时上传副本与推理产物
 demo/uploads/
 __pycache__/
+
+# 本地Python环境与提交检查中间文件
+.venv/
+
+# 提交前本地证据、文档预览与修复前备份
+测试区/提交前检查-20261113/

@@ -12,8 +12,8 @@ export function MotionProvider({reduced,children}:{reduced:boolean;children:Reac
 }
 export function useReducedMotion(){return useContext(ReducedMotion);}
 export {gsap,useGSAP};
-export function attachSpotlight(){
-  if(typeof window.matchMedia==='function'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return()=>{};
+export function attachSpotlight(reduced=false){
+  if(reduced||(typeof window.matchMedia==='function'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches))return()=>{};
   const handler=(event:PointerEvent)=>{
     const card=(event.target as HTMLElement).closest<HTMLElement>('[data-spotlight]');
     if(!card)return;

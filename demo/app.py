@@ -157,7 +157,7 @@ class LiveState:
             self.stop()
             self.event=threading.Event(); session=uuid.uuid4().hex
             # 记录本会话在用的上传副本，避免并发上传的剪除误删在用文件
-            self.active_upload = self.uploads.get(source) if kind == 'video' else None
+            self.active_upload = Path(source) if kind == 'video' else None
             with self.lock: self.snapshot={'id':session,'status':'connecting','sequence':0,'kind':kind}
             self.thread=threading.Thread(target=self.run,args=(session,kind,source,conf,mode,self.event),daemon=True)
             self.thread.start()

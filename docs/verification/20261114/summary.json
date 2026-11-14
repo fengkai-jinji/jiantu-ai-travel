@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-14",
+  "tests": {
+    "frontend": 12,
+    "backend": 63,
+    "indoor": 26,
+    "total": 101,
+    "passed": true
+  },
+  "typecheck": true,
+  "productionBuild": true,
+  "buildWarning": "Three.js chunk 537.61 KB / gzip 133.32 KB",
+  "browser": {
+    "pages": 5,
+    "widths": [
+      1440,
+      390
+    ],
+    "uncaughtErrors": 0,
+    "horizontalOverflow": false,
+    "demoButton": true,
+    "reduceMotionSpotlight": true,
+    "navigationHeadingVisible": true
+  },
+  "realApi": {
+    "places": true,
+    "routesIncludingMetro": true,
+    "nearbyFoodCount": 5,
+    "nearbyFoodSeconds": 0.17,
+    "knowledge": {
+      "mode": "ai",
+      "sourceCount": 3,
+      "seconds": 15.89
+    },
+    "indoorImage": "negative fixture, zero project targets",
+    "outdoorImage": "existing puddle fixture, confidence 0.8351"
+  },
+  "unverified": [
+    "camera permissions",
+    "audible speech",
+    "full screen-reader flow",
+    "real indoor positive example"
+  ],
+  "note": "单张样本和离线测试不能代替模型准确率、真实用户与硬件验收。"
+}
